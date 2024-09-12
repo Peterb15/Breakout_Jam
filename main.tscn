@@ -1,0 +1,261 @@
+[gd_scene load_steps=18 format=3 uid="uid://dlcsl2b4tiuu5"]
+
+[ext_resource type="Script" path="res://Script/ball.gd" id="1_q7xo7"]
+[ext_resource type="Script" path="res://Script/paddle.gd" id="2_a6fvk"]
+[ext_resource type="Texture2D" uid="uid://r3w4mqmccvsc" path="res://Assets/ball.png" id="2_udlpx"]
+[ext_resource type="PackedScene" uid="uid://bky660vw4blfu" path="res://Scenes/brick.tscn" id="3_p5lpf"]
+[ext_resource type="Texture2D" uid="uid://dt6lkvubkujuj" path="res://Assets/gray.png" id="3_tcbsw"]
+[ext_resource type="Script" path="res://Script/brick_manager.gd" id="3_tyfe8"]
+[ext_resource type="Texture2D" uid="uid://iihvlnnr6b6e" path="res://Assets/paddle.png" id="3_xoexm"]
+[ext_resource type="Script" path="res://Script/small_ball.gd" id="4_ncyr2"]
+[ext_resource type="PackedScene" uid="uid://btakp66up4bre" path="res://Scenes/background.tscn" id="5_2j8qa"]
+[ext_resource type="Script" path="res://Script/game_over.gd" id="8_3jcro"]
+[ext_resource type="PackedScene" uid="uid://dtaxjt3wpxsdh" path="res://Scenes/slow_mo.tscn" id="9_3ofne"]
+[ext_resource type="PackedScene" uid="uid://b2atihmg1vs1t" path="res://Scenes/movingBrick.tscn" id="10_j5jqq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s2al1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2nd5w"]
+size = Vector2(42, 4.26749)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ik22"]
+size = Vector2(1149, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dq2fv"]
+size = Vector2(20, 661)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7liwj"]
+size = Vector2(2036, 44)
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource("5_2j8qa")]
+modulate = Color(0.887251, 0.555642, 0.95962, 1)
+show_behind_parent = true
+position = Vector2(589, 353)
+scale = Vector2(1.39631, 1.85203)
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(847, 419)
+motion_mode = 1
+script = ExtResource("1_q7xo7")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_udlpx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+scale = Vector2(2.1, 2.1)
+shape = SubResource("CircleShape2D_s2al1")
+
+[node name="SlowMo" type="Timer" parent="Ball"]
+wait_time = 5.0
+one_shot = true
+
+[node name="smallBall" type="CharacterBody2D" parent="."]
+position = Vector2(1097, 229)
+scale = Vector2(0.5, 0.5)
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("4_ncyr2")
+
+[node name="Sprite2D" type="Sprite2D" parent="smallBall"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_udlpx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="smallBall"]
+scale = Vector2(2.1, 2.1)
+shape = SubResource("CircleShape2D_s2al1")
+
+[node name="SlowMo" type="Timer" parent="smallBall"]
+wait_time = 5.0
+one_shot = true
+
+[node name="Paddle" type="CharacterBody2D" parent="." groups=["Paddle"]]
+position = Vector2(695, 626)
+scale = Vector2(0.9, 0.9)
+motion_mode = 1
+script = ExtResource("2_a6fvk")
+
+[node name="Paddle" type="Sprite2D" parent="Paddle"]
+position = Vector2(0, 1)
+rotation = 1.5708
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("3_xoexm")
+
+[node name="topCollision" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(0, -31.0625)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision7" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(72, 10)
+rotation = -0.90059
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision13" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(-72, 11)
+rotation = 0.90059
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision2" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(37, -27)
+rotation = 0.226893
+scale = Vector2(0.781094, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision3" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(59, -20)
+rotation = 0.453786
+scale = Vector2(0.306758, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision4" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(69, -14)
+rotation = 0.680678
+scale = Vector2(0.24, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision5" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(75, -7)
+rotation = 1.02102
+scale = Vector2(0.24, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision8" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(-37, -27)
+rotation = -0.226893
+scale = Vector2(0.781094, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision9" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(-59, -20)
+rotation = -0.453786
+scale = Vector2(0.306758, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision10" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(-69, -14)
+rotation = -0.680678
+scale = Vector2(0.24, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="topCollision11" type="CollisionShape2D" parent="Paddle"]
+position = Vector2(-75, -7)
+rotation = -1.02102
+scale = Vector2(0.24, 1)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="length" type="CollisionShape2D" parent="Paddle"]
+scale = Vector2(3.75005, 1.01731)
+shape = SubResource("RectangleShape2D_2nd5w")
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(296, -351)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2(281, 341)
+shape = SubResource("RectangleShape2D_8ik22")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ceiling"]
+position = Vector2(274, 336)
+scale = Vector2(88.4, 2.52)
+texture = ExtResource("3_tcbsw")
+
+[node name="rWall" type="StaticBody2D" parent="."]
+position = Vector2(1178, -11)
+scale = Vector2(1, 1.64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rWall"]
+position = Vector2(-13, 321)
+scale = Vector2(2.44, 1)
+shape = SubResource("RectangleShape2D_dq2fv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="rWall"]
+position = Vector2(-12, 327)
+scale = Vector2(4.04, 38.08)
+texture = ExtResource("3_tcbsw")
+
+[node name="lWall" type="StaticBody2D" parent="."]
+position = Vector2(-2, 0)
+scale = Vector2(1, 2.36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lWall"]
+position = Vector2(-13, 321)
+scale = Vector2(2.44, 1)
+shape = SubResource("RectangleShape2D_dq2fv")
+
+[node name="Sprite2D2" type="Sprite2D" parent="lWall"]
+position = Vector2(-12, 327)
+scale = Vector2(4.04, 38.08)
+texture = ExtResource("3_tcbsw")
+
+[node name="Score" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = 488.0
+offset_top = -45.0
+offset_right = 1065.0
+offset_bottom = 52.0
+theme_override_font_sizes/normal_font_size = 40
+text = "SCORE: 0"
+
+[node name="StartText" type="RichTextLabel" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = 33.0
+offset_top = 578.0
+offset_right = 368.0
+offset_bottom = 673.0
+theme_override_font_sizes/normal_font_size = 40
+text = "[CLICK TO START]"
+
+[node name="GameOver" type="StaticBody2D" parent="." groups=["GameOver"]]
+position = Vector2(539, 697)
+script = ExtResource("8_3jcro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOver"]
+shape = SubResource("RectangleShape2D_7liwj")
+
+[node name="Timer" type="Timer" parent="GameOver"]
+wait_time = 3.0
+
+[node name="brickBlock2" type="Node2D" parent="."]
+position = Vector2(1094, 376)
+rotation = 3.14159
+scale = Vector2(0.652, 0.758)
+script = ExtResource("3_tyfe8")
+brick_scene = ExtResource("3_p5lpf")
+
+[node name="brickBlock1" type="Node2D" parent="."]
+position = Vector2(249, 597)
+rotation = 3.14159
+scale = Vector2(0.652, 0.758)
+script = ExtResource("3_tyfe8")
+brick_scene = ExtResource("3_p5lpf")
+
+[node name="brickBlock3" type="Node2D" parent="." groups=["movingBrick"]]
+position = Vector2(737, 71)
+rotation = 1.5708
+scale = Vector2(0.652, 0.758)
+script = ExtResource("3_tyfe8")
+brick_scene = ExtResource("10_j5jqq")
+
+[node name="brickBlock4" type="Node2D" parent="." groups=["movingBrick"]]
+position = Vector2(361, 160)
+scale = Vector2(0.652, 0.758)
+script = ExtResource("3_tyfe8")
+brick_scene = ExtResource("10_j5jqq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="brickBlock4"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 315)
+scale = Vector2(6.12, 2.51)
+zoom = Vector2(0.935, 0.925)
+
+[node name="SlowMo" parent="." groups=["SecondBall"] instance=ExtResource("9_3ofne")]
+position = Vector2(1096, 228)
+rotation = 1.5708
+
+[connection signal="timeout" from="Ball/SlowMo" to="Ball" method="_on_slow_mo_timeout"]
+[connection signal="timeout" from="smallBall/SlowMo" to="smallBall" method="_on_slow_mo_timeout"]

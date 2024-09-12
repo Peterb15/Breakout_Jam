@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2atihmg1vs1t"]
+
+[ext_resource type="Texture2D" uid="uid://xcfp5hynglxk" path="res://Assets/blue.png" id="1_02ps5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pxsg"]
+size = Vector2(98, 40)
+
+[sub_resource type="Animation" id="Animation_t0pka"]
+resource_name = "Brick_move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(150, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v3e37"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hgh7u"]
+_data = {
+"Brick_move": SubResource("Animation_t0pka"),
+"RESET": SubResource("Animation_v3e37")
+}
+
+[node name="movingBrick" type="AnimatableBody2D" groups=["Bricks", "movingBrick"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+physics_interpolation_mode = 1
+scale = Vector2(1.08643, 1.08643)
+shape = SubResource("RectangleShape2D_4pxsg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.328, 0.058)
+texture = ExtResource("1_02ps5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hgh7u")
+}
